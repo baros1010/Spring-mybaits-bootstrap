@@ -22,22 +22,25 @@ $(document).ready(function(){
 		
 				// contentType: 'application/x-www-form-urlencoded',
 		       contentType:"application/json;charset=utf-8",
-		        dataType:"json",
+		        dataType:"text",
 		        success:function(data)
 		        { 
 		        
-		        if(data.success=="OK"){
-		        	alert("ddd");
+		        
+		        	
 		        	window.location.href = 'http://localhost:9081/spring2withfront/main.html';
-		        }
+		        
 		        	
 		           
 		        },
-		        error:function(e){
-		        	alert("a");
+		        error:function(data){
+		        	 var result = data.responseText;  
+		        	 alert(result);
+		        	 
 		        }
 		});	
 		return false;
+		
 	})
 
 	

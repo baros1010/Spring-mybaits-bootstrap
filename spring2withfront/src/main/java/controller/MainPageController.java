@@ -9,25 +9,25 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainPageController extends BaseController{
 	@RequestMapping(value = "/main.html")
-	public ModelAndView list(HttpServletRequest request) {
+	public ModelAndView list() {
 		ModelAndView view = null ;
 		
-		if(getSessionUser(request)!=null){
+//		if(getSessionUser(request)!=null){
 		
 			 view = new ModelAndView("main");
 			
 			 
 			
-		}else{
-			 view = new ModelAndView("login");
+//		}else{
+//			 view = new ModelAndView("login");
 			
-		}
+//		}
 		return view;
 	}
 
-	@Override
-	public ModelAndView list() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+//	@Override
+//	public ModelAndView list() {
+//		// TODO 自動生成されたメソッド・スタブ
+//		return null;
+//	}
 }

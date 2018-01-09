@@ -19,22 +19,23 @@ $(document).ready(function(){
 			type:'POST',
 			async:false,
 			data: serStr,
-		
-				// contentType: 'application/x-www-form-urlencoded',
-		       contentType:"application/json;charset=utf-8",
-		        dataType:"json",
+		   contentType:"application/json;charset=utf-8",
+		    dataType:"text",
 		        success:function(data)
 		        { 
 		        
-		        if(data.success=="OK"){
+		        
 		        	
 		        	window.location.href = 'http://localhost:9081/spring2withfront/main.html';
-		        }
+		        
 		        	
 		           
 		        },
-		        error:function(e){
-		        	alert("a");
+		        error:function(data){
+		        	 var result = data.responseText;  
+		        	  var json =$.parseJSON(result)
+		        	 alert(json.errorMessage);
+		        	 
 		        }
 		});	
 		return false;

@@ -1,14 +1,8 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-
-	id="study" version="2.5">
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
 	<display-name>Archetype Created Web Application</display-name>
 
 
@@ -17,10 +11,20 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:spring-*.xml</param-value>
 	</context-param>
-<!-- 上下文监听器 -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+	<filter>
+		<filter-name>AIFExceptionHandler</filter-name>
+		<filter-class>filter.AIFExceptionHandler</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AIFExceptionHandler</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<!-- 上下文监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 	<listener>
 		<listener-class>listener.MyListener</listener-class>
 	</listener>

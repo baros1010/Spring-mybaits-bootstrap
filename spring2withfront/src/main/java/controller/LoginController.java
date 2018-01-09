@@ -4,22 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import bean.UserBean;
+import exception.UsersException;
 import service.LoginService;
 
-@Controller
-public class LoginController<HttpServletResponse> extends BaseController {
+@RestController
+public class LoginController {
 	@Resource
 	public LoginService log;
 
@@ -32,17 +32,14 @@ public class LoginController<HttpServletResponse> extends BaseController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public ResponseEntity<Map> Login(@RequestBody UserBean userbean,HttpServletRequest req) {
-		System.out.println(userbean.getPassword());
+	public ResponseEntity Login(@RequestBody UserBean userbean) throws UsersException{
 		int count = log.isLogin(userbean.getUsername(), userbean.getPassword());
-		Map<String,HttpStatus> map=new HashMap<String,HttpStatus>();
-		map.put("success", HttpStatus.OK);
-		
-			setSessionUser(req,userbean);
-			return new ResponseEntity<Map>(map,HttpStatus.OK);
-			
-		
-		
+		Map<String, HttpStatus> map = new HashMap<String, HttpStatus>();
+		// map.put("success", HttpStatus.OK);
+
+		// setSessionUser(req,userbean);
+
+		return new ResponseEntity(new HashMap<Object, Object>(), HttpStatus.OK);
 
 	}
 
