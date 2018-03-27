@@ -21,13 +21,14 @@ $(document).ready(function(){
 			data: serStr,
 		   contentType:"application/json;charset=utf-8",
 		    dataType:"text",
+		   
 		        success:function(data)
 		        { 
 		        
 		        
 		        	
 		        	window.location.href = 'http://localhost:9081/spring2withfront/main.html';
-		        
+		     
 		        	
 		           
 		        },

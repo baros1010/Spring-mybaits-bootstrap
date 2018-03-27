@@ -32,7 +32,7 @@
 
 	<context:component-scan base-package="controller" />
 	<context:component-scan base-package="service" />
-	
+	<context:component-scan base-package="tokenManage" />
 
 
 
@@ -44,7 +44,13 @@
 	<mvc:annotation-driven />
 	<context:annotation-config />
 	<mvc:default-servlet-handler />
-
+	<mvc:interceptors>
+		<!-- 对所有请求都拦截，公共拦截器可以有多个 -->
+		<bean name="AuthorizationInterceptor" class="filter.AuthorizationInterceptor" />
+		<!-- <bean name="testInterceptor" class="cn.zifangsky.interceptor.TestInterceptor" 
+			/> -->
+	
+	</mvc:interceptors>
 	<!-- json 获得 -->
 
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> 

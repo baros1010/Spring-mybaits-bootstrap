@@ -1,10 +1,14 @@
 package controller;
 
+import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,18 +18,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.research.ws.wadl.Request;
+
+import bean.TokenBean;
 import bean.UserBean;
 import exception.UsersException;
 import service.LoginService;
+import tokenManage.TokenManager;
 
 @RestController
 public class LoginController {
 	@Resource
 	public LoginService log;
-
+	@Autowired
+	TokenManager manager;
 	@RequestMapping(value = "/logins.html")
 	public ModelAndView list() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		ModelAndView mv = new ModelAndView("login");
 		return mv;
 	}
@@ -38,8 +47,10 @@ public class LoginController {
 		// map.put("success", HttpStatus.OK);
 
 		// setSessionUser(req,userbean);
-
-		return new ResponseEntity(new HashMap<Object, Object>(), HttpStatus.OK);
+		TokenBean token=manager.createToken(userbean.getUsername());
+	
+		
+		return new ResponseEntity(token, HttpStatus.OK);
 
 	}
 

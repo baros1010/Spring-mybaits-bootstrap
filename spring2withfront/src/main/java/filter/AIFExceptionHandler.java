@@ -13,16 +13,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 
 import exception.UsersException;
-
 
 /**
  * Servlet Filter implementation class AIFExceptionHandler
  */
 public class AIFExceptionHandler implements Filter {
 	private static Logger logger = Logger.getLogger(AIFExceptionHandler.class);
+
 	/**
 	 * Default constructor.
 	 */
@@ -68,12 +67,12 @@ public class AIFExceptionHandler implements Filter {
 				Map<String, String> resObj = (HashMap<String, String>) uex.getResObj();
 				String resJson = createErrorJson(resObj.get("errorCode"), resObj.get("errorMessage"));
 				hsr.getWriter().write(resJson);
-			}else{
+			} else {
 				HttpServletResponse hsr = (HttpServletResponse) response;
 				hsr.setStatus(500);
 				hsr.setCharacterEncoding("UTF-8");
-				String resJson = createErrorJson("err","系统出错");
-				
+				String resJson = createErrorJson("err", "系统出错");
+
 				hsr.getWriter().write(resJson);
 			}
 

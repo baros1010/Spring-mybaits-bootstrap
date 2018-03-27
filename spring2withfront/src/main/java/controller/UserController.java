@@ -9,7 +9,7 @@ public class UserController extends BaseController{
 	@Override
 	@RequestMapping(value = "/table.html")
 	public ModelAndView list() {
-		// TODO 自動生成されたメソッド・スタブ
+
 		ModelAndView view = new ModelAndView("table");
 		return view;
 	}
