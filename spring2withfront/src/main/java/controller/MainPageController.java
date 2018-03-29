@@ -2,10 +2,7 @@ package controller;
 
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import bean.TokenBean;
+import common.Authorization;
 import tokenManage.TokenManager;
 
 @Controller
@@ -32,6 +29,7 @@ public class MainPageController extends BaseController{
 	}
 	@RequestMapping(value = "/getPage", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
+	@Authorization
 	public ResponseEntity getMainPage(){
 		return new ResponseEntity(new HashMap<String,String>(), HttpStatus.OK);
 	}

@@ -9,7 +9,7 @@ $(document).ready(function(){
              : $.isArray(obj[n]) ? obj[n].concat(v)
              : [obj[n], v];
          });
-         //obj.nameCounts = count + "";//表单name个数
+         // obj.nameCounts = count + "";//表单name个数
          return JSON.stringify(obj);
      };
 	$("#login").click(function(){
@@ -23,12 +23,15 @@ $(document).ready(function(){
 		    dataType:"text",
 		   
 		        success:function(data)
-		        { 
-		        
-		        
-		        	
+		        {  	  
+	        	  var json =$.parseJSON(data);
+	        	   	 alert(json.token);
+		        	   var localStorage=window.localStorage;
+		        	   
+		        	localStorage.setItem("token", json.token);
 		        	window.location.href = 'http://localhost:9081/spring2withfront/main.html';
-		     
+		        	var tokens=localStorage.getItem("token");
+		        	alert(tokens);
 		        	
 		           
 		        },
