@@ -26,7 +26,7 @@ public class RedisTokenManager implements TokenManager {
 		String token = UUID.randomUUID().toString().replace("-", "");
 		TokenBean bean = new TokenBean(userId, token);
 
-		jedis.setex(userId, 600, token);
+		jedis.setex(userId, 5, token);
 		return bean;
 	}
 

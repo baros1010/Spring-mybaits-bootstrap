@@ -9,6 +9,7 @@ import JWT.JWT;
 import bean.TokenBean;
 import bean.UserBean;
 import redis.clients.jedis.Jedis;
+
 @Component
 public class RedisTokenManager2 implements TokenManager2 {
 	@Autowired
@@ -21,15 +22,23 @@ public class RedisTokenManager2 implements TokenManager2 {
 	}
 
 	@Override
-	public String createToken(UserBean user) {
+	public TokenBean createToken(UserBean user) {
 		// TODO 自動生成されたメソッド・スタブ
 		String token = JWT.sign(user, 60L * 1000L * 30L);
 		jedis.setex(user.getUsername(), 600, token);
-		return token;
+		TokenBean bean = new TokenBean(user.getUsername(), token);
+		return bean;
 	}
 
 	@Override
-	public boolean checkToken(String token, String userId) {
+	public boolean checkToken(String userId) {
+		if (userId == null || userId.length() == 0) {
+			return false;
+		}
+		String token = jedis.get(userId);
+		if (token == null || token.length() == 0) {
+			return false;
+		}
 		UserBean user = JWT.unsign(token, UserBean.class);
 		if (user == null || !userId.equals(user.getUsername())) {
 			return false;

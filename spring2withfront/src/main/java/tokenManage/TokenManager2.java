@@ -1,9 +1,10 @@
 package tokenManage;
 
+import bean.TokenBean;
 import bean.UserBean;
 
 public interface TokenManager2 {
-	public String createToken(UserBean user);
+	public TokenBean createToken(UserBean user);
 
-	boolean checkToken(String token, String userId);
+	boolean checkToken( String userId);
 }

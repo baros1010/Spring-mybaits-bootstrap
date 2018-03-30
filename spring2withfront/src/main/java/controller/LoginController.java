@@ -1,8 +1,5 @@
 package controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import bean.TokenBean;
 import bean.UserBean;
 import exception.UsersException;
 import service.LoginService;
@@ -39,13 +37,10 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public ResponseEntity Login(@RequestBody UserBean userbean) throws UsersException{
-		int count = log.isLogin(userbean.getUsername(), userbean.getPassword());
-		Map<String, HttpStatus> map = new HashMap<String, HttpStatus>();
-		// map.put("success", HttpStatus.OK);
+		 log.isLogin(userbean.getUsername(), userbean.getPassword());
 
-		// setSessionUser(req,userbean);
 		//TokenBean token=manager.createToken(userbean.getUsername());
-		String token = manager2.createToken(userbean);
+		TokenBean token = manager2.createToken(userbean);
 	
 		
 		return new ResponseEntity(token, HttpStatus.OK);

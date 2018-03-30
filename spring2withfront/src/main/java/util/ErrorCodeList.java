@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public enum ErrorCodeList {
 	BSC_0001("BSC_0001","用户密码不正确"),
-	BSC_0002("BSC_0002","其他错误");
+	BSC_0002("BSC_0002","用户无权限");
 	private String errorCode;
 	private String errorMessage;
 	private static final Map<String,ErrorCodeList> mapping;

@@ -12,8 +12,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import bean.TokenBean;
 import common.Authorization;
+import exception.ExceptionBuilder;
 import tokenManage.TokenManager;
 import tokenManage.TokenManager2;
+import util.ErrorCodeList;
 /**
  * 拦截器 判断权限
  * @author firas
@@ -35,7 +37,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 		}
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		Method method = handlerMethod.getMethod();
-		String authorization = request.getHeader(AUTHORIZATION);
+		
 		String username = request.getHeader(USERNAME);
 //		TokenBean token = manager.getToken(authorization);
 //		if (manager.checkToken(token)) {
@@ -43,13 +45,13 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 //			return true;
 //
 //		}
-		if(manager.checkToken(authorization, username)){
+		if(manager.checkToken(username)){
 			
 			return true;
 		}
 		if(method.getAnnotation(Authorization.class) != null){
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return false;	
+			throw ExceptionBuilder.getUserException(ErrorCodeList.BSC_0002);
 		}
 		return true;
 
